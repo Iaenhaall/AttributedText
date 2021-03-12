@@ -30,7 +30,7 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
    **Result:**
 
-   ![Example](./Images/1 feature.png)
+   ![1 feature](./Images/1%20feature.png)
 
 2. Handles unopened/unclosed tags.
 
@@ -42,7 +42,7 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
    **Result:**
 
-   ![Example](./Images/2 feature.png)
+   ![2 feature](./Images/2%20feature.png)
 
 3. Supports overlapping tags.
 
@@ -54,7 +54,7 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
    **Result:**
 
-   ![Example](./Images/3 feature.png)
+   ![3 feature](./Images/3%20feature.png)
 
 4. Deletes tags that have no modifiers.
 
@@ -66,7 +66,7 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
    **Result:**
 
-   ![Example](./Images/4 feature.png)
+   ![4 feature](./Images/4%20feature.png)
    
 5. Does **not** handle HTML characters such as `&amp;`.
 
@@ -78,7 +78,7 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
    **Result:**
 
-   ![Example](./Images/5 feature.png)
+   ![5 feature](./Images/5%20feature.png)
    
 6. **Only single-word tags are supported**. Tags with more than one word or containing any characters besides letters are ignored and not deleted.
 
@@ -90,7 +90,7 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
    **Result:**
 
-   ![Example](./Images/6 feature.png)
+   ![6 feature](./Images/6%20feature.png)
 
 
 
