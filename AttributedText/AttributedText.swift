@@ -14,10 +14,11 @@ import SwiftUI
  containing any characters besides letters are ignored and not deleted.
  
  # Notes: #
- 1. Handles unopened/unclosed tags.
- 2. Basic modifiers can still be applied, such as changing the font and color of the text.
- 3. Deletes tags that have no modifiers.
- 4. Does **not** handle HTML characters, for example `&lt;`.
+ 1. Basic modifiers can still be applied, such as changing the font and color of the text.
+ 2. Handles unopened/unclosed tags.
+ 3. Supports overlapping tags.
+ 4. Deletes tags that have no modifiers.
+ 5. Does **not** handle HTML characters such as `&amp;`.
  
  # Example #
  ```
