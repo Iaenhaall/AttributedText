@@ -18,6 +18,10 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
 ## Features
 
+You can clone the repo and run the **AttributedTextExample** project to explore the `AttributedText` features.
+
+These are the main points to pay attention to.
+
 1. Basic modifiers can still be applied, such as changing the font and color of the text.
 
    **Code example:**
@@ -80,7 +84,7 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
    ![5 feature](./Images/5%20feature.png)
    
-6. **Only single-word tags are supported**. Tags with more than one word or containing any characters besides letters are ignored and not deleted.
+6. **Only single-word tags are supported**. Tags with more than one word or containing any characters besides **letters** or **numbers** are ignored and not removed.
 
    **Code example:**
 
@@ -94,10 +98,18 @@ AttributedText("A unit of <i>length</i> equal to <b>one hundred-millionth of a c
 
 
 
-
 ## Installation and usage
 
-1. Manually add **AttributedText.swift** and **HTML2TextParser.swift** files to your project.
+#### Via Swift Package Manager
+
+1. In Xcode 11 or greater select `File ▸ Swift Packages ▸ Add Package Dependency`.
+2. Paste the link to this repo https://github.com/Iaenhaall/AttributedText.git and click **Next**.
+3. Define the package options for this package or select the default. Click **Next**.
+4. Xcode downloads the code from GitHub and adds the package to the your project target. Click **Finish**.
+
+#### Manually
+
+1. Add **[AttributedText.swift](https://github.com/Iaenhaall/AttributedText/blob/master/Sources/AttributedText/AttributedText.swift)** and **[HTML2TextParser.swift](https://github.com/Iaenhaall/AttributedText/blob/master/Sources/AttributedText/HTML2TextParser.swift)** files to your project.
 
 2. Modify or complement the **availableTags** dictionary in the **HTML2TextParser** class.
 

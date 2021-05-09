@@ -1,6 +1,6 @@
 //
 //  HTML2TextParser.swift
-//  AttributedText
+//
 //
 //  Created by Никита Белокриницкий on 11.03.2021.
 //
@@ -10,17 +10,17 @@ import SwiftUI
 /**
  Parser for converting HTML-tagged text to SwiftUI Text View.
  
- - warning: Only single-word tags are supported. Tags with more than one word or
- containing any characters besides letters are ignored and not deleted.
+ - warning: **Only single-word tags are supported**. Tags with more than one word or
+ containing any characters besides **letters** or **numbers** are ignored and not removed.
  
  # Notes: #
  1. Handles unopened/unclosed tags.
  2. Deletes tags that have no modifiers.
  3. Does **not** handle HTML characters, for example `&lt;`.
  */
-public class HTML2TextParser {
+internal class HTML2TextParser {
     /// The result of the parser's work.
-    private(set) var formattedText = Text("")
+    internal private(set) var formattedText = Text("")
     /// HTML-tagged text.
     private let htmlString: String
     /// Set of currently active tags.
@@ -29,12 +29,20 @@ public class HTML2TextParser {
     private let availableTags: Dictionary<String, (Text) -> (Text)> = [
         // This modifier set is presented just for reference.
         // Set the necessary attributes and modifiers for your needs before use.
+        "h1": { $0.font(.largeTitle) },
+        "h2": { $0.font(.title) },
+        "h3": { $0.font(.headline) },
+        "h4": { $0.font(.subheadline) },
+        "h5": { $0.font(.callout) },
+        "h6": { $0.font(.caption) },
+        
         "i": { $0.italic() },
         "u": { $0.underline() },
         "s": { $0.strikethrough() },
         "b": { $0.fontWeight(.bold) },
-        "sup": { $0.baselineOffset(5).font(.callout) },
-        "sub": { $0.baselineOffset(-5).font(.callout) }
+        
+        "sup": { $0.baselineOffset(10).font(.footnote) },
+        "sub": { $0.baselineOffset(-10).font(.footnote) }
     ]
 
     /**
@@ -42,12 +50,12 @@ public class HTML2TextParser {
      
      - parameter htmlString: HTML-tagged string.
      */
-    init(_ htmlString: String) {
+    internal init(_ htmlString: String) {
         self.htmlString = htmlString
     }
 
     /// Starts the text parsing process. The results of this method will be placed in the `formattedText` variable.
-    public func parse() {
+    internal func parse() {
         var tag: String? = nil
         var endTag: Bool = false
         var startIndex = htmlString.startIndex
@@ -87,7 +95,7 @@ public class HTML2TextParser {
             }
 
             if tag != nil {
-                if htmlString[index].isLetter {
+                if htmlString[index].isLetter || htmlString[index].isHexDigit {
                     tag?.append(htmlString[index])
                 } else {
                     tag = nil
