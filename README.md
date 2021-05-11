@@ -22,7 +22,39 @@ You can clone the repo and run the **AttributedTextExample** project to explore 
 
 These are the main points to pay attention to.
 
-1. Basic modifiers can still be applied, such as changing the font and color of the text.
+1. You can define the tags you need or use the defaults.
+
+   You need to set the required tags and provide associated closures. Each closure must be a modifier that is applied to the **SwiftUI Text View** when a specific tag is encountered.
+
+   ##### Override the default values, for example at application launch.
+
+   ```swift
+   @main
+   struct ExampleApp: App {
+       init() {
+           AttributedText.tags = [
+               "b": { $0.bold() },
+               "i": { $0.italic() }
+           ]
+       }
+   }
+   ```
+
+   In this case only **\<b\>** and **\<i\>** tags will be processed. All other tags will be ignored or deleted.
+
+   ##### Set the custom values for each instance.
+
+   ```swift
+   private let tags: Dictionary<String, (Text) -> (Text)> = [
+       // Set the necessary values.
+   ]
+   
+   var body: some View {
+       AttributedText("Text", tags: tags)
+   }
+   ```
+
+2. Basic modifiers can still be applied, such as changing the font and color of the text.
 
    **Code example:**
 
@@ -36,7 +68,7 @@ These are the main points to pay attention to.
 
    ![1 feature](./Images/1%20feature.png)
 
-2. Handles unopened/unclosed tags.
+3. Handles unopened/unclosed tags.
 
    **Code example:**
 
@@ -48,7 +80,7 @@ These are the main points to pay attention to.
 
    ![2 feature](./Images/2%20feature.png)
 
-3. Supports overlapping tags.
+4. Supports overlapping tags.
 
    **Code example:**
 
@@ -60,7 +92,7 @@ These are the main points to pay attention to.
 
    ![3 feature](./Images/3%20feature.png)
 
-4. Deletes tags that have no modifiers.
+5. Deletes tags that have no modifiers.
 
    **Code example:**
 
@@ -71,8 +103,8 @@ These are the main points to pay attention to.
    **Result:**
 
    ![4 feature](./Images/4%20feature.png)
-   
-5. Does **not** handle HTML characters such as `&amp;`.
+
+6. Does **not** handle HTML characters such as `&amp;`.
 
    **Code example:**
 
@@ -83,8 +115,8 @@ These are the main points to pay attention to.
    **Result:**
 
    ![5 feature](./Images/5%20feature.png)
-   
-6. **Only single-word tags are supported**. Tags with more than one word or containing any characters besides **letters** or **numbers** are ignored and not removed.
+
+7. **Only single-word tags are supported**. Tags with more than one word or containing any characters besides **letters** or **numbers** are ignored and not removed.
 
    **Code example:**
 
@@ -111,16 +143,4 @@ These are the main points to pay attention to.
 
 1. Add **[AttributedText.swift](https://github.com/Iaenhaall/AttributedText/blob/master/Sources/AttributedText/AttributedText.swift)** and **[HTML2TextParser.swift](https://github.com/Iaenhaall/AttributedText/blob/master/Sources/AttributedText/HTML2TextParser.swift)** files to your project.
 
-2. Modify or complement the **availableTags** dictionary in the **HTML2TextParser** class.
-
-   You need to add the required tags and provide associated closures. Each closure must be a modifier that is applied to the SwiftUI Text View when a specific tag is encountered. For example:
-
-   ```swift
-   private let availableTags: Dictionary<String, (Text) -> (Text)> = [
-       "b": { $0.bold() },
-       "i": { $0.italic() }
-   ]
-   ```
-
-   In this case only **\<b\>** and **\<i\>** tags will be processed. All other tags will be ignored or deleted.
 

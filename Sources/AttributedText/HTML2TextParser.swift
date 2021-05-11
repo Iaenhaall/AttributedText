@@ -13,7 +13,7 @@ import SwiftUI
  - warning: **Only single-word tags are supported**. Tags with more than one word or
  containing any characters besides **letters** or **numbers** are ignored and not removed.
  
- # Notes: #
+ # Notes:
  1. Handles unopened/unclosed tags.
  2. Deletes tags that have no modifiers.
  3. Does **not** handle HTML characters, for example `&lt;`.
@@ -26,32 +26,17 @@ internal class HTML2TextParser {
     /// Set of currently active tags.
     private var tags: Set<String> = []
     /// Set of supported tags and associated modifiers.
-    private let availableTags: Dictionary<String, (Text) -> (Text)> = [
-        // This modifier set is presented just for reference.
-        // Set the necessary attributes and modifiers for your needs before use.
-        "h1": { $0.font(.largeTitle) },
-        "h2": { $0.font(.title) },
-        "h3": { $0.font(.headline) },
-        "h4": { $0.font(.subheadline) },
-        "h5": { $0.font(.callout) },
-        "h6": { $0.font(.caption) },
-        
-        "i": { $0.italic() },
-        "u": { $0.underline() },
-        "s": { $0.strikethrough() },
-        "b": { $0.fontWeight(.bold) },
-        
-        "sup": { $0.baselineOffset(10).font(.footnote) },
-        "sub": { $0.baselineOffset(-10).font(.footnote) }
-    ]
+    private let availableTags: Dictionary<String, (Text) -> (Text)>
 
     /**
      Creates a new parser instance.
      
      - parameter htmlString: HTML-tagged string.
+     - parameter availableTags: Set of supported tags and associated modifiers.
      */
-    internal init(_ htmlString: String) {
+    internal init(_ htmlString: String, availableTags: Dictionary<String, (Text) -> (Text)>) {
         self.htmlString = htmlString
+        self.availableTags = availableTags
     }
 
     /// Starts the text parsing process. The results of this method will be placed in the `formattedText` variable.

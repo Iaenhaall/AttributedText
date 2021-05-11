@@ -29,6 +29,26 @@ import SwiftUI
  ```
  */
 public struct AttributedText: View {
+    /// Set of supported tags and associated modifiers. This is used by default for all AttributedText
+    /// instances except those for which this parameter is defined in the initializer.
+    public static var tags: Dictionary<String, (Text) -> (Text)> = [
+        // This modifier set is presented just for reference.
+        // Set the necessary attributes and modifiers for your needs before use.
+        "h1": { $0.font(.largeTitle) },
+        "h2": { $0.font(.title) },
+        "h3": { $0.font(.headline) },
+        "h4": { $0.font(.subheadline) },
+        "h5": { $0.font(.callout) },
+        "h6": { $0.font(.caption) },
+        
+        "i": { $0.italic() },
+        "u": { $0.underline() },
+        "s": { $0.strikethrough() },
+        "b": { $0.fontWeight(.bold) },
+        
+        "sup": { $0.baselineOffset(10).font(.footnote) },
+        "sub": { $0.baselineOffset(-10).font(.footnote) }
+    ]
     /// Parser formatted text.
     private let text: Text
 
@@ -36,9 +56,10 @@ public struct AttributedText: View {
      Creates a text view that displays formatted content.
      
      - parameter htmlString: HTML-tagged string.
+     - parameter tags: Set of supported tags and associated modifiers for a particular instance.
      */
-    public init(_ htmlString: String) {
-        let parser = HTML2TextParser(htmlString)
+    public init(_ htmlString: String, tags: Dictionary<String, (Text) -> (Text)>? = nil) {
+        let parser = HTML2TextParser(htmlString, availableTags: tags == nil ? AttributedText.tags : tags!)
         parser.parse()
         text = parser.formattedText
     }
